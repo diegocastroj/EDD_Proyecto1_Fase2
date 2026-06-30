@@ -5,6 +5,7 @@
 #include "../include/GestorJSON.h"
 #include "../include/GestorCertificados.h"
 #include "../include/ArbolMerkle.h"
+#include "../include/GestorReportes.h"
 
 using namespace std;
 
@@ -52,6 +53,7 @@ int main() {
     GestorJSON gestorJSON;
     GestorCertificados gestorCertificados;
     ArbolMerkle* arbolMerkle = new ArbolMerkle();
+    GestorReportes gestorReportes;
     
     string opcion;
     
@@ -118,6 +120,41 @@ int main() {
         }
         else if (opcion == "5.3") {
             arbolMerkle->mostrarRaiz();
+        }
+        else if (opcion == "6.1") {
+            cout << "\nGenerando reporte del Arbol B...\n";
+            gestorReportes.graficarArbolB(arbolB);
+        }
+        else if (opcion == "6.2") {
+            cout << "\nIngrese la fecha del AVL a graficar (YYYY-MM-DD): ";
+            string fecha;
+            cin >> fecha;
+            ArbolAVL* avl = arbolB->buscar(fecha);
+            if (avl != nullptr) {
+                gestorReportes.graficarAVL(avl, fecha);
+            } else {
+                cout << "No hay registros para esa fecha.\n";
+            }
+        }
+        else if (opcion == "6.5") {
+            cout << "\nIngrese la fecha del lote: ";
+            string fecha;
+            cin >> fecha;
+            cout << "Ingrese el codigo de lote (ej. L001): ";
+            string cod;
+            cin >> cod;
+            
+            ArbolAVL* avl = arbolB->buscar(fecha);
+            if (avl != nullptr) {
+                Lote* lote = avl->buscarLote(cod);
+                if (lote != nullptr) {
+                    gestorReportes.graficarTrazabilidad(lote);
+                } else {
+                    cout << "Lote no encontrado.\n";
+                }
+            } else {
+                cout << "Fecha no encontrada.\n";
+            }
         }
         else if (opcion == "0") {
             cout << "\nSaliendo del sistema...\n";
