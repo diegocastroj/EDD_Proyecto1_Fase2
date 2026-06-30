@@ -25,6 +25,7 @@ public:
     bool insertar(std::string codigo, std::string nombre, std::string region, std::string propietario);
     bool existeFinca(std::string codigo);
     std::string obtenerNombreFinca(std::string codigo);
+    std::string obtenerRegion(std::string codigo);
     void mostrarFincas();
 };
 

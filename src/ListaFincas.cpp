@@ -45,6 +45,15 @@ std::string ListaFincas::obtenerNombreFinca(std::string codigo) {
     return "Desconocida";
 }
 
+std::string ListaFincas::obtenerRegion(std::string codigo) {
+    NodoFinca* actual = cabeza;
+    while (actual) {
+        if (actual->codigo == codigo) return actual->region;
+        actual = actual->siguiente;
+    }
+    return "Desconocida";
+}
+
 void ListaFincas::mostrarFincas() {
     NodoFinca* actual = cabeza;
     while (actual) {
